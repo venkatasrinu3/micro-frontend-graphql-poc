@@ -1,0 +1,12 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+body::-webkit-scrollbar{
+  width: 2px;
+  background-color:transparent;
+}
+body::-webkit-scrollbar-thumb {
+  width: 1.5px;
+  background-color:rgba(0,0,0,0.5);
+}
