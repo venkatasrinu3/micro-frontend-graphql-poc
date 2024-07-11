@@ -1,3 +1,4 @@
+import React from "react"
 import { useQuery } from "@apollo/client";
 import { GET_POST_DATA } from "../../graphql/queries";
 import { useCallback, useEffect, useState } from "react";

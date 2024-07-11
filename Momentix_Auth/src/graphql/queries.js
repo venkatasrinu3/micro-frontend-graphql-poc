@@ -2,12 +2,11 @@ import { gql } from "@apollo/client";
 
 export const GET_USER_DATA = gql`
 query GetUserData{
-    users {
-        name,
-        age,
-        gender,
-        userId
+  indigoList {
+    items {
+      client_name
     }
+  }
 }
 `
 export const ADD_NEW_USER = gql`

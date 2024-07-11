@@ -1,0 +1,23 @@
+/* Button styling */
+
+@mixin btn-styling($bgcolor,$borderColor,$color){
+    background-color: $bgcolor;
+    border-color: $borderColor;
+    color: $color;
+}
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+.btn-submit-success{
+    @include btn-styling(transparent,green,green);
+    &:hover{
+        @include btn-styling(green,white,white);
+    }
+}
+.btn-submit-danger{
+    @include btn-styling(transparent,red,red);
+    &:hover{
+        @include btn-styling(red,transparent,transparent);
+    }
+}

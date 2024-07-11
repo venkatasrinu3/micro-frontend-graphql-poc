@@ -1,9 +1,10 @@
+import React from "react"
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-const MainContainer = () => {
-    return(
+const MainContainer = ({ handleLogout }) => {
+    return (
         <Routes>
-            <Route path="/" element={<Home />}></Route>
+            <Route path="/" element={<Home handleLogout={handleLogout} />}></Route>
         </Routes>
     )
 }

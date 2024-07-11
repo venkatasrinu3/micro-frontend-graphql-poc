@@ -1,10 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import UsersReducer from "./UsersReducer";
-import LoginReducer from "./LoginReducer";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { rootreducer } from "./rootreducer";
+
+const persistConfig = {
+    key: "root",
+    storage,
+    whitelist: ["loginState", "usersState"]
+}
+
+const persistedReducer = persistReducer(persistConfig, rootreducer)
 
 export const store = configureStore({
-    reducer: {
-        usersState: UsersReducer,
-        loginState: LoginReducer
-    }
+    reducer: persistedReducer
 })
+
+export const persistor = persistStore(store);

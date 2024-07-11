@@ -3,22 +3,23 @@ import "./SignupForm.scss"
 import { Button, TextField, Typography } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMutation, useQuery } from '@apollo/client';
-import { ADD_NEW_USER, GET_USER_DATA } from '../../graphql/queries';
+import { GET_USER_DATA } from '../../graphql/queries';
+import { addUser, getUser } from '../../redux/UsersReducer';
 
 function SignupForm({ setNeedToSignup }) {
+    const dispatch = useDispatch();
     const navigate = useNavigate()
-    const [addUser, { loading, error, data }] = useMutation(ADD_NEW_USER,{
-        refetchQueries:[
-            {
-                query: GET_USER_DATA
-            }
-        ]
-    });
-    const {loading: user,error: getError,data: newUserList} = useQuery(GET_USER_DATA);
+    // const [addUser, { loading, error, data }] = useMutation(ADD_NEW_USER,{
+    //     refetchQueries:[
+    //         {
+    //             query: GET_USER_DATA
+    //         }
+    //     ]
+    // });
+    const { loading: user, error: getError, data: newUserList } = useQuery(GET_USER_DATA);
     const usersState = useSelector(state => state.usersState);
-    console.log("thuis is the users State ====>", usersState)
     const [form, setForm] = useState({
         name: "",
         age: "",
@@ -36,26 +37,21 @@ function SignupForm({ setNeedToSignup }) {
         })
     }
 
-    const handleSubmit = async (name, age, gender, email) => {
-        try {
-            await addUser({ variables: { name: name, age: parseInt(age), gender: gender, email: email } })
-        }
-        catch (err) {
-            console.error(err);
-        }
+    const handleSubmit = (name, age, gender, email) => {
+        dispatch(addUser({ name: name, age: parseInt(age), gender: gender, email: email }))
+        dispatch(getUser())
     }
     const proceedToLogin = (e) => {
         e.preventDefault()
         const { name, age, gender, email, password } = form;
         if (!!name && !!age && !!gender && !!email && !!password) {
-            console.log("total users List",newUserList.users);
-            if(!newUserList.users.map(ele=>ele.name).includes(name)){
+            if (!newUserList.users.map(ele => ele.name).includes(name)) {
                 handleSubmit(name, age, gender, email)
                 alert("User created successfully!!!")
                 setTimeout(() => {
                     setNeedToSignup(false)
                 }, 800);
-            }else{
+            } else {
                 alert("User already exists !!!")
             }
         }
@@ -65,6 +61,9 @@ function SignupForm({ setNeedToSignup }) {
     }
     const checkIsUser = () => {
         setNeedToSignup(false)
+    }
+    const handleQuery = () => {
+        dispatch(getUser())
     }
     return (
         <div className='signup-form'>
@@ -80,6 +79,7 @@ function SignupForm({ setNeedToSignup }) {
                 <Button type='submit' className='login-btn mb-3' endIcon={<LoginIcon className='login-icon' />} onClick={proceedToLogin}>
                     Welcome to Momentix
                 </Button>
+                <button className='btn btn-outline-success' onClick={handleQuery}>click to query</button>
                 <p className='no-account-txt m-0'>Already an user <span className='signup-entry' onClick={checkIsUser}>Click here!!</span></p>
             </div>
         </div>

@@ -8,12 +8,14 @@ import { loginAction } from '../../redux/LoginReducer';
 import SignupForm from '../signup-flow/SignupForm';
 import { useQuery } from '@apollo/client';
 import { GET_USER_DATA } from '../../graphql/queries';
+import "../../app-styles.scss"
 
 function LoginForm() {
     const {loading,error, data} = useQuery(GET_USER_DATA)
+    console.log("Data from AEM Content fragments",data)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const usersState = useSelector(state => state.usersState);
+    const usersState = useSelector(state => state);
     const [needToSignup, setNeedToSignup] = useState(false);
     const [form, setForm] = useState({
         userId: "",
