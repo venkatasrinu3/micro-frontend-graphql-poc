@@ -1,0 +1,42 @@
+@keyframes zoomInImage {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+.testimonial-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    column-gap: 30px;
+
+    & .testimonial-cards {
+        background: rgba(255, 255, 255, 0.2);
+        flex-shrink: 0;
+        min-width: 248px;
+        width: calc(100% / 4 - 30px);
+
+        & .card-header {
+            padding: 10px;
+            font-weight: 700;
+            font-size: 20px !important;
+            color: green;
+        }
+
+        & .card-content {
+            & .card-image {
+                margin-bottom: 20px;
+
+                &:hover {
+                    animation-name: zoomInImage;
+                    animation-duration: 1.5s;
+                    animation-fill-mode: both;
+                }
+            }
+        }
+    }
+}
