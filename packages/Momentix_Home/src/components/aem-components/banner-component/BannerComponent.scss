@@ -1,0 +1,40 @@
+.banner-content-wrapper {
+    & .banner-container {
+        position: relative;
+        display: flex;
+        height: 100% !important;
+        flex-direction: column;
+
+        & .banner-image {
+            object-fit: cover;
+        }
+
+        & .banner-description {
+            position: absolute;
+            bottom: 0;
+            height: 100%;
+            width:100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            display:flex;
+            flex-direction:column;
+            row-gap: 10px;
+            justify-content: flex-end;
+            & .banner-title {
+                font-size: 30px;
+                font-weight: 700;
+                color: greenyellow;
+                &+span{
+                    color:yellow;
+                }
+            }
+
+
+        }
+
+    }
+}
+
+.slick-slide>div {
+    margin: 0 10px;
+}

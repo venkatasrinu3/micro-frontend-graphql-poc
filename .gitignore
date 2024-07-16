@@ -1,4 +1,5 @@
-./Momentix_Auth/node_modules/
-./Momentix_Home/node_modules/
-./server/node_modules/
- 
+node_modules/
+packages/Momentix_Auth/node_modules/
+packages/Momentix_Home/node_modules/
+packages/server/node_modules/
+packages/design-system/node_modules/
